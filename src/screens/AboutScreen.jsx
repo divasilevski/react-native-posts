@@ -1,10 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { AnimationDragAndDrop } from '../components/Animations/DragAndDrop';
+import { AnimationFadeIn } from '../components/Animations/FadeIn';
+import { AnimationHereHere } from '../components/Animations/HereHere';
+import { AnimationLoopHere } from '../components/Animations/LoopHere';
 
 export const AboutScreen = ({}) => {
   return (
     <View style={styles.center}>
-      <Text>About Screen</Text>
+      <AnimationDragAndDrop />
+      <AnimationLoopHere />
+      <AnimationHereHere />
+      <AnimationFadeIn>
+        <Text>About Screen</Text>
+      </AnimationFadeIn>
     </View>
   );
 };
