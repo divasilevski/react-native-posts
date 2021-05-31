@@ -35,3 +35,10 @@ export const DATA = [
     booked: false,
   },
 ];
+
+export const START_CHART_DATA = [
+  [0, 0],
+  [50, 50],
+  [100, 0],
+  [150, 200],
+];
