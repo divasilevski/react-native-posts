@@ -26,7 +26,7 @@ export const MainScreen = ({ navigation }) => {
 };
 
 MainScreen.navigationOptions = ({ navigation }) => ({
-  headerTitle: 'Блог',
+  headerTitle: 'Все посты',
   headerRight: () => (
     <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
       <Item
