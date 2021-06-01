@@ -1,18 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { DragAndDrop } from '../components/DragAndDrop';
 
 export const BookmarkScreen = ({}) => {
   return (
-    <View style={styles.center}>
-      <Text>Bookmark Screen</Text>
+    <View style={styles.container}>
+      <DragAndDrop />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  center: {
+  container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
   },
 });
