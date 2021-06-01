@@ -17,15 +17,15 @@ export const BookmarkScreen = ({ navigation }) => {
   return <PostList data={data} onOpen={openPostHandler} />;
 };
 
-BookmarkScreen.navigationOptions = {
+BookmarkScreen.navigationOptions = ({ navigation }) => ({
   headerTitle: 'Избранное',
   headerLeft: () => (
     <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
       <Item
         title="Toggle drawer"
         iconName="ios-menu"
-        onPress={() => console.log('press photo')}
+        onPress={() => navigation.toggleDrawer()}
       />
     </HeaderButtons>
   ),
-};
+});
