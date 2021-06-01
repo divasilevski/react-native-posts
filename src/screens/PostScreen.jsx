@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   View,
   Text,
@@ -12,10 +13,28 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
 import { DATA } from '../data';
 import { THEME } from '../theme';
+import { toggleBooked } from '../store/actions/post';
 
 export const PostScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
   const postId = navigation.getParam('postId');
   const post = DATA.find((p) => p.id === postId);
+
+  const booked = useSelector((state) =>
+    state.post.bookedPosts.some((post) => post.id === postId)
+  );
+
+  React.useEffect(() => {
+    navigation.setParams({ booked });
+  }, [booked]);
+
+  const toggleHandler = React.useCallback(() => {
+    dispatch(toggleBooked(postId));
+  }, [dispatch, postId]);
+
+  React.useEffect(() => {
+    navigation.setParams({ toggleHandler });
+  }, [toggleHandler]);
 
   const removeHandler = () => {
     Alert.alert('Удаление поста', 'Вы уверены?', [
@@ -48,16 +67,13 @@ PostScreen.navigationOptions = ({ navigation }) => {
   const date = navigation.getParam('date');
   const formatDate = new Date(date).toLocaleDateString();
   const booked = navigation.getParam('booked');
+  const toggleHandler = navigation.getParam('toggleHandler');
   const iconName = booked ? 'ios-star' : 'ios-star-outline';
   return {
     headerTitle: `пост от ${formatDate}`,
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-        <Item
-          title="Stared"
-          iconName={iconName}
-          onPress={() => console.log('press photo')}
-        />
+        <Item title="Stared" iconName={iconName} onPress={toggleHandler} />
       </HeaderButtons>
     ),
   };
