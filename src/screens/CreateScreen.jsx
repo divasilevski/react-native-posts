@@ -15,24 +15,28 @@ import {
 } from 'react-native';
 import { addPost } from '../store/actions/post';
 import { THEME } from '../theme';
+import { PhotoPicker } from '../components/PhotoPicker';
 
 export const CreateScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const [text, setText] = React.useState('');
-
-  const img =
-    'https://static.coindesk.com/wp-content/uploads/2019/01/shutterstock_1012724596-860x430.jpg';
+  const imgRef = React.useRef();
 
   const saveHandler = () => {
     const post = {
       date: new Date().toJSON(),
       text: text,
-      img: img,
+      img: imgRef.current,
       booked: false,
     };
     dispatch(addPost(post));
     navigation.navigate('Main');
   };
+
+  const photoPickHandler = (uri) => {
+    imgRef.current = uri;
+  };
+
   return (
     <ScrollView>
       <TouchableWithoutFeedback
@@ -49,16 +53,12 @@ export const CreateScreen = ({ navigation }) => {
             placeholder="Введите текст поста"
             multiline
           />
-          <Image
-            style={styles.image}
-            source={{
-              uri: img,
-            }}
-          />
+          <PhotoPicker onPick={photoPickHandler} />
           <Button
             title="Создать"
             color={THEME.MAIN_COLOR}
             onPress={saveHandler}
+            disabled={!text}
           />
         </View>
       </TouchableWithoutFeedback>
