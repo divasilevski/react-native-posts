@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
 import {
@@ -12,11 +13,26 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
+import { addPost } from '../store/actions/post';
 import { THEME } from '../theme';
 
-export const CreateScreen = ({}) => {
+export const CreateScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [text, setText] = React.useState('');
-  const saveHandler = () => {};
+
+  const img =
+    'https://static.coindesk.com/wp-content/uploads/2019/01/shutterstock_1012724596-860x430.jpg';
+
+  const saveHandler = () => {
+    const post = {
+      date: new Date().toJSON(),
+      text: text,
+      img: img,
+      booked: false,
+    };
+    dispatch(addPost(post));
+    navigation.navigate('Main');
+  };
   return (
     <ScrollView>
       <TouchableWithoutFeedback
@@ -36,7 +52,7 @@ export const CreateScreen = ({}) => {
           <Image
             style={styles.image}
             source={{
-              uri: 'https://static.coindesk.com/wp-content/uploads/2019/01/shutterstock_1012724596-860x430.jpg',
+              uri: img,
             }}
           />
           <Button
