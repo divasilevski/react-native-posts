@@ -10,6 +10,7 @@ import { PostScreen } from '../screens/PostScreen';
 import { AboutScreen } from '../screens/AboutScreen';
 import { CreateScreen } from '../screens/CreateScreen';
 import { BookmarkScreen } from '../screens/BookmarkScreen';
+import { KeyboardScreen } from '../screens/KeyboardScreen';
 import { THEME } from '../theme';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -89,6 +90,13 @@ const CreateNavigator = createStackNavigator(
   navigatorOptions
 );
 
+const KeyboardNavigator = createStackNavigator(
+  {
+    Keyboard: KeyboardScreen,
+  },
+  navigatorOptions
+);
+
 const MainNavigator = createDrawerNavigator(
   {
     PostTabs: {
@@ -109,9 +117,14 @@ const MainNavigator = createDrawerNavigator(
         drawerLabel: 'Новый пост',
       },
     },
+    KeyboardMenu: {
+      screen: KeyboardNavigator,
+      navigationOptions: {
+        drawerLabel: 'Кастомная клавиатура',
+      },
+    },
   },
   {
-    hideStatusBar: true,
     contentOptions: {
       activeTintColor: THEME.MAIN_COLOR,
       labelStyle: {
