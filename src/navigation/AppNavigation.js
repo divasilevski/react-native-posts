@@ -8,6 +8,7 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import { MainScreen } from '../screens/MainScreen';
 import { PostScreen } from '../screens/PostScreen';
 import { AboutScreen } from '../screens/AboutScreen';
+import { ListScreen } from '../screens/ListScreen';
 import { CreateScreen } from '../screens/CreateScreen';
 import { BookmarkScreen } from '../screens/BookmarkScreen';
 import { THEME } from '../theme';
@@ -75,6 +76,13 @@ const BottomNavigator =
         },
       });
 
+const ListNavigator = createStackNavigator(
+  {
+    List: ListScreen,
+  },
+  navigatorOptions
+);
+
 const AboutNavigator = createStackNavigator(
   {
     About: AboutScreen,
@@ -91,6 +99,12 @@ const CreateNavigator = createStackNavigator(
 
 const MainNavigator = createDrawerNavigator(
   {
+    ListMenu: {
+      screen: ListNavigator,
+      navigationOptions: {
+        drawerLabel: 'Кастомный список',
+      },
+    },
     PostTabs: {
       screen: BottomNavigator,
       navigationOptions: {
