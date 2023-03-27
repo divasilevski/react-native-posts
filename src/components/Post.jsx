@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   StyleSheet,
   ImageBackground,
   Text,
   TouchableOpacity,
-} from 'react-native';
+} from "react-native";
 
 export const Post = ({ post, onOpen }) => {
   const formatDate = new Date(post.date).toLocaleDateString();
@@ -25,20 +25,20 @@ export const Post = ({ post, onOpen }) => {
 const styles = StyleSheet.create({
   post: {
     marginBottom: 15,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 200,
   },
   textWrap: {
-    backgroundColor: 'rgba(0,0,0, 0.5)',
+    backgroundColor: "rgba(0,0,0, 0.5)",
     paddingVertical: 5,
-    alignItems: 'center',
-    width: '100%',
+    alignItems: "center",
+    width: "100%",
   },
   title: {
-    color: '#fff',
-    fontFamily: 'open-regular',
+    color: "#fff",
+    fontFamily: "open-regular",
   },
 });

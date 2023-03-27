@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, StyleSheet, FlatList, Text } from 'react-native';
-import { Post } from '../components/Post';
+import React from "react";
+import { View, StyleSheet, FlatList, Text } from "react-native";
+import { Post } from "../components/Post";
 
 export const PostList = ({ data, onOpen }) => {
   if (!data.length) {
@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   noItems: {
-    fontFamily: 'open-regular',
+    fontFamily: "open-regular",
     marginVertical: 10,
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 18,
   },
 });

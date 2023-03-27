@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Self Blog",
+    "name": "react-native-posts",
     "slug": "react-native-posts",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -19,11 +19,11 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.divasilevskidev.react-native-posts",
-      "buildNumber": "1.0.0"
+      "buildNumber": "1.2.0"
     },
     "android": {
       "package": "com.divasilevskidev.react_native_posts",
-      "versionCode": 1,
+      "versionCode": 2,
       "permissions": ["CAMERA", "WRITE_EXTERNAL_STORAGE"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",

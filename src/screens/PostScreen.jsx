@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   View,
   Text,
@@ -8,15 +8,16 @@ import {
   Button,
   ScrollView,
   Alert,
-} from 'react-native';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import { AppHeaderIcon } from '../components/AppHeaderIcon';
-import { THEME } from '../theme';
-import { removePost, toggleBooked } from '../store/actions/post';
+} from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { AppHeaderIcon } from "../components/AppHeaderIcon";
+import { THEME } from "../theme";
+import { removePost, toggleBooked } from "../store/actions/post";
 
-export const PostScreen = ({ navigation }) => {
+export const PostScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
-  const postId = navigation.getParam('postId');
+  const postId = route.params.postId;
+
   const post = useSelector((state) =>
     state.post.allPosts.find((post) => post.id === postId)
   );
@@ -33,16 +34,12 @@ export const PostScreen = ({ navigation }) => {
     dispatch(toggleBooked(post));
   }, [dispatch, post]);
 
-  React.useEffect(() => {
-    navigation.setParams({ toggleHandler });
-  }, [toggleHandler]);
-
   const removeHandler = () => {
-    Alert.alert('Удаление поста', 'Вы уверены?', [
-      { text: 'Отменить', style: 'cancel' },
+    Alert.alert("Удаление поста", "Вы уверены?", [
+      { text: "Отменить", style: "cancel" },
       {
-        text: 'Удалить',
-        style: 'destructive',
+        text: "Удалить",
+        style: "destructive",
         onPress: () => {
           navigation.goBack();
           dispatch(removePost(postId));
@@ -51,6 +48,26 @@ export const PostScreen = ({ navigation }) => {
     ]),
       { cancelable: false };
   };
+
+  const setNavigationOptions = () => {
+    const date = route.params.date;
+    const formatDate = new Date(date).toLocaleDateString();
+    const booked = route.params.booked;
+    const iconName = booked ? "ios-star" : "ios-star-outline";
+
+    navigation.setOptions({
+      title: `пост от ${formatDate}`,
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+          <Item title="Stared" iconName={iconName} onPress={toggleHandler} />
+        </HeaderButtons>
+      ),
+    });
+  };
+
+  React.useEffect(() => {
+    setNavigationOptions();
+  });
 
   if (!post) return null;
 
@@ -69,31 +86,15 @@ export const PostScreen = ({ navigation }) => {
   );
 };
 
-PostScreen.navigationOptions = ({ navigation }) => {
-  const date = navigation.getParam('date');
-  const formatDate = new Date(date).toLocaleDateString();
-  const booked = navigation.getParam('booked');
-  const toggleHandler = navigation.getParam('toggleHandler');
-  const iconName = booked ? 'ios-star' : 'ios-star-outline';
-  return {
-    headerTitle: `пост от ${formatDate}`,
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-        <Item title="Stared" iconName={iconName} onPress={toggleHandler} />
-      </HeaderButtons>
-    ),
-  };
-};
-
 const styles = StyleSheet.create({
   image: {
-    width: '100%',
+    width: "100%",
     height: 200,
   },
   textWrap: {
     padding: 10,
   },
   title: {
-    fontFamily: 'open-regular',
+    fontFamily: "open-regular",
   },
 });

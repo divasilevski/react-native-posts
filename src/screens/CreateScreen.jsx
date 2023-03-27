@@ -1,25 +1,22 @@
-import * as React from 'react';
-import { useDispatch } from 'react-redux';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import { AppHeaderIcon } from '../components/AppHeaderIcon';
+import * as React from "react";
+import { useDispatch } from "react-redux";
 import {
   View,
   Text,
   StyleSheet,
   TextInput,
-  Image,
   Button,
   ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
-} from 'react-native';
-import { addPost } from '../store/actions/post';
-import { THEME } from '../theme';
-import { PhotoPicker } from '../components/PhotoPicker';
+} from "react-native";
+import { addPost } from "../store/actions/post";
+import { THEME } from "../theme";
+import { PhotoPicker } from "../components/PhotoPicker";
 
 export const CreateScreen = ({ navigation }) => {
   const dispatch = useDispatch();
-  const [text, setText] = React.useState('');
+  const [text, setText] = React.useState("");
   const imgRef = React.useRef();
 
   const saveHandler = () => {
@@ -30,7 +27,7 @@ export const CreateScreen = ({ navigation }) => {
       booked: false,
     };
     dispatch(addPost(post));
-    navigation.navigate('Main');
+    navigation.navigate("Main");
   };
 
   const photoPickHandler = (uri) => {
@@ -66,34 +63,21 @@ export const CreateScreen = ({ navigation }) => {
   );
 };
 
-CreateScreen.navigationOptions = ({ navigation }) => ({
-  headerTitle: 'Создать пост',
-  headerLeft: () => (
-    <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-      <Item
-        title="Toggle drawer"
-        iconName="ios-menu"
-        onPress={() => navigation.toggleDrawer()}
-      />
-    </HeaderButtons>
-  ),
-});
-
 const styles = StyleSheet.create({
   wrapper: {
     padding: 10,
   },
   title: {
     fontSize: 20,
-    textAlign: 'center',
-    fontFamily: 'open-regular',
+    textAlign: "center",
+    fontFamily: "open-regular",
     marginVertical: 10,
   },
   textArea: {
     padding: 10,
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 200,
     marginBottom: 10,
   },

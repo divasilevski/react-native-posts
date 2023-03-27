@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { View, StyleSheet, Button, Image, Alert } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
+import * as React from "react";
+import { View, StyleSheet, Button, Image, Alert } from "react-native";
+import * as ImagePicker from "expo-image-picker";
 
 async function askForPermissions() {
   const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-  if (status !== 'granted') {
-    Alert.alert('Ошибка', 'Вы не дали прав на создание фото');
+  if (status !== "granted") {
+    Alert.alert("Ошибка", "Вы не дали прав на создание фото");
     return false;
   }
   return true;
@@ -24,8 +24,11 @@ export const PhotoPicker = ({ onPick }) => {
       aspect: [16, 9],
     });
 
-    setImage(img.uri);
-    onPick(img.uri);
+    if (!img.canceled) {
+      const uri = img.assets[0].uri;
+      setImage(uri);
+      onPick(uri);
+    }
   };
   return (
     <View style={styles.wrapper}>
@@ -40,7 +43,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 200,
     marginTop: 10,
   },
